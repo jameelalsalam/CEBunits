@@ -19,7 +19,23 @@ install_extra_units <- function() {
   units::install_unit("trillion", "1e12 1", "Trillion")
   units::install_unit("quadrillion", "1e15 1", "Quadrillion")
 
+  # Energy
+  units::install_unit(c("kwh", "kWh"), "kilowatthour")
 
-  # called from onLoad, this object ensures called just once per session
-  extra_units_installed <<- TRUE
+}
+
+remove_extra_units <- function() {
+
+  # Conversion constants
+  units::remove_unit("dozen", "Dozen")
+  units::remove_unit("hundred", "Hundred")
+  units::remove_unit("thousand", "Thousand")
+  units::remove_unit("million", "Million")
+  units::remove_unit("billion", "Billion")
+  units::remove_unit("trillion", "Trillion")
+  units::remove_unit("quadrillion", "Quadrillion")
+
+  # Energy
+  units::remove_unit(c("kwh", "kWh"))
+
 }
