@@ -19,4 +19,13 @@ test_that("extra units do not error", {
 
   # Emissions
   expect_silent(set_units(1, "MMTCO2e"))
+  em1 <- set_units(1, "MMTCO2e")
+
+  # equivalent alternatives:
+  # c("MMTCO2e", "TgCO2e", "MtCO2e", "million tonnes CO2e")
+  expect_equal(set_units(1, "TgCO2e") %>% set_units("MMTCO2e"), em1)
+  expect_equal(set_units(1, "MtCO2e") %>% set_units("MMTCO2e"), em1)
+  expect_equal(set_units(1, "million tonnes CO2e") %>% set_units("MMTCO2e"), em1)
+
+
 })
