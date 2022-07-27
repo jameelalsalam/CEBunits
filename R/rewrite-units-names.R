@@ -18,5 +18,10 @@ rewrite_unit_names <- function(x) {
     'short tons' = 'tons'
   )
 
-  str_replace_all(x, coll(rewrite_abbreviations))
+  bound_regex <- function(x) paste0("\\b\\Q", x, "\\E\\b")
+  bound_regex_map <- function(x) {
+    set_names(x, nm = bound_regex(names(x)))
+  }
+
+  str_replace_all(x, bound_regex_map(rewrite_abbreviations))
 }

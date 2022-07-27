@@ -6,7 +6,7 @@
 #' @param x tibble with columns as specified in details
 #' @param from_unit unit to convert from
 #' @param to_unit unit to convert to
-#' @param rename_fun function chr->chr to standardize aliases to unit package names
+#' @param rewrite_unit_fun function chr->chr to standardize aliases to unit package names
 #'
 #' Input tibble must have _at least_ 2 columns:
 #' * 'unit' (character vector)
@@ -33,7 +33,7 @@
 convert_units <- function(x,
                           from_unit = NULL,
                           to_unit = NA_character_,
-                          rename_fun = rewrite_unit_names) {
+                          rewrite_unit_fun = rewrite_unit_names) {
 
   stopifnot(is.data.frame(x))
   stopifnot(all(c("unit", "value") %in% names(x)))
@@ -49,8 +49,8 @@ convert_units <- function(x,
   if(conv_case == "test all input x for conversion to_unit length 1") {
     test_crosswalk <- tibble(from_unit = unique(x$unit), to_unit = to_unit) %>%
       mutate(
-        from_units_unit = do.call(rename_fun, list(from_unit)),
-        to_units_unit = do.call(rename_fun, list(to_unit))) %>%
+        from_units_unit = do.call(rewrite_unit_fun, list(from_unit)),
+        to_units_unit = do.call(rewrite_unit_fun, list(to_unit))) %>%
       mutate(ud_convertible = if_else(
         map2_lgl(from_units_unit, to_units_unit, units:::ud_are_convertible),
         TRUE, FALSE))
@@ -90,8 +90,8 @@ convert_units <- function(x,
 
     # use supplied function to rename non-standard names to
     # units package standard names
-    mutate(from_units_unit = do.call(rename_fun, list(from_unit)),
-           to_units_unit = do.call(rename_fun, list(to_unit))) %>%
+    mutate(from_units_unit = do.call(rewrite_unit_fun, list(from_unit)),
+           to_units_unit = do.call(rewrite_unit_fun, list(to_unit))) %>%
 
     # pull conversion factors on min size table with mixed_units
     mutate(conv_factor = as.numeric(units::set_units(units::mixed_units(1, from_units_unit), to_units_unit)))

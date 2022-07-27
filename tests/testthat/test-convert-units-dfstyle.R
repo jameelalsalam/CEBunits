@@ -1,6 +1,6 @@
 
 
-library(tidyverse)
+suppressPackageStartupMessages(library(tidyverse))
 
 rnd_values <- function(data) {
   mutate(data, value = round(value, digits = 2))
