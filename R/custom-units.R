@@ -19,9 +19,12 @@ install_extra_units <- function() {
   units::install_unit("trillion", "1e12 1", "Trillion")
   units::install_unit("quadrillion", "1e15 1", "Quadrillion")
 
-  # Emissions
+  ### GHG Emissions
+
+  # Weight
   units::remove_unit("kt") # in default units database, kt is a symbol for knots. After removal, kt is recognized as kilotonnes ('k' prefix with symbol 't' for metric tonnes)
 
+  # GWP Forcing
   units::install_unit("CO2e")
   units::install_unit("tCO2e", "t CO2e")
   units::install_unit("MMTCO2e", "1e6 tCO2e")
@@ -33,13 +36,35 @@ install_extra_units <- function() {
   # c("MMTCO2e", "TgCO2e", "MtCO2e", "million tonnes CO2e")
 
 
+  ### Natural Gas and Oil
+
+  # Energy
+  units::install_unit('BOE','5691000 Btu', 'barrel oil equivalent') # From EIA calculator (https://www.eia.gov/energyexplained/units-and-calculators/energy-conversion-calculators.php), 2021 preliminary
+  units::install_unit('Mcfe', '1039000 Btu', 'natural gas Mcf equivalent') # From EIA calculator, based on U.S. average for NG delivered to consumers in 2021, preliminary
+
+  # Volume
+  units::install_unit("MMbbl", "1e6 barrels")
+
+  units::install_unit(c("scf", "cf"), name = "standard cubic foot")
+  units::install_unit("Mcf", "1e3 scf", "Mscf") # allow M to mean 'thousand' here...
+  units::install_unit("MMcf", "1e6 scf", "MMscf")
+  units::install_unit("Bcf", "1e9 scf")
+
+
+  ### Electricity
+
   # Energy
   units::install_unit(c("kwh", "kWh"), "kilowatthour")
   units::install_unit("MMBtu", "1e6 Btu")
-  units::install_unit("MMbbl", "1e6 barrels")
-  units::install_unit("MMcf", "1e6 ft^3", "MMscf")
 
-  # Economic
+
+  ### Agriculture
+
+  # Weight
+  units::install_unit("cwt", "100 pounds", "hundredweight") # see USDA
+  # units::install_unit("bales") # variation by crop and standard
+
+  ### Economic
   units::install_unit("dollar")
   units::install_unit("cent", def = ".01 dollar")
 }
