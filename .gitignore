@@ -1,0 +1,7 @@
+.Rhistory
+.Rproj.user
+man/
+*.html
+*.svg
+*.png
+~*.xlsx
