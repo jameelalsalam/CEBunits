@@ -9,9 +9,14 @@ test_that("base units package units do not error", {
 
 
 test_that("extra units do not error", {
+
+  # Energy
   expect_silent(set_units(1, "quadrillion Btu"))
   expect_silent(set_units(1, "kWh")) # uppercase
   expect_silent(set_units(1, "kwh")) # lowercase
   expect_silent(set_units(1, "billion kwh"))
   expect_silent(set_units(1, "MMBtu"))
+
+  # Emissions
+  expect_silent(set_units(1, "MMTCO2e"))
 })

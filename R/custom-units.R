@@ -19,9 +19,22 @@ install_extra_units <- function() {
   units::install_unit("trillion", "1e12 1", "Trillion")
   units::install_unit("quadrillion", "1e15 1", "Quadrillion")
 
+  # Emissions
+  units::remove_unit("kt") # in default units database, kt is a symbol for knots. After removal, kt is recognized as kilotonnes ('k' prefix with symbol 't' for metric tonnes)
+
+  units::install_unit("CO2e")
+  units::install_unit("tCO2e", "t CO2e")
+  units::install_unit("MMTCO2e", "1e6 tCO2e")
+  units::install_unit("gCO2e", "g CO2e")
+  units::install_unit("MMT", "1e6 tonnes")
+  #units::install_unit("MT", "tonnes")
+
+
   # Energy
   units::install_unit(c("kwh", "kWh"), "kilowatthour")
   units::install_unit("MMBtu", "1e6 Btu")
+  units::install_unit("MMbbl", "1e6 barrels")
+  units::install_unit("MMcf", "1e6 ft^3", "MMscf")
 
   # Economic
   units::install_unit("dollar")
