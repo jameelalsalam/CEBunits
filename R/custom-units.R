@@ -21,21 +21,9 @@ install_extra_units <- function() {
 
   # Energy
   units::install_unit(c("kwh", "kWh"), "kilowatthour")
+  units::install_unit("MMBtu", "1e6 Btu")
 
-}
-
-remove_extra_units <- function() {
-
-  # Conversion constants
-  units::remove_unit("dozen", "Dozen")
-  units::remove_unit("hundred", "Hundred")
-  units::remove_unit("thousand", "Thousand")
-  units::remove_unit("million", "Million")
-  units::remove_unit("billion", "Billion")
-  units::remove_unit("trillion", "Trillion")
-  units::remove_unit("quadrillion", "Quadrillion")
-
-  # Energy
-  units::remove_unit(c("kwh", "kWh"))
-
+  # Economic
+  units::install_unit("dollar")
+  units::install_unit("cent", def = ".01 dollar")
 }

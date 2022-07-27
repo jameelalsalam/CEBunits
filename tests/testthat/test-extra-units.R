@@ -13,4 +13,5 @@ test_that("extra units do not error", {
   expect_silent(set_units(1, "kWh")) # uppercase
   expect_silent(set_units(1, "kwh")) # lowercase
   expect_silent(set_units(1, "billion kwh"))
+  expect_silent(set_units(1, "MMBtu"))
 })

@@ -1,11 +1,11 @@
 .onLoad <- function(libname, pkgname) {
   packageStartupMessage('CEBunits package startup\n', domain = NULL, appendLF = TRUE)
 
-  # install custom units
+  # load standard units DB, then custom units
+  units::load_units_xml()
   install_extra_units()
-  # TODO: maybe onunload to ensure only called once per session?
 }
 
 .onUnload <- function(libpath) {
-  remove_extra_units()
+  units::load_units_xml()
 }
