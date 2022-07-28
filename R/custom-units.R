@@ -29,7 +29,7 @@ install_extra_units <- function() {
   units::install_unit("tCO2e", "t CO2e")
   units::install_unit("MMTCO2e", "1e6 tCO2e")
   units::install_unit("gCO2e", "g CO2e")
-  #units::install_unit("MMT", "1e6 tonnes")
+  units::install_unit("MMT", "1e6 tonnes")
   #units::install_unit("MT", "tonnes")
 
   # under this approach, any of the following can be understood by the system:
